@@ -2,7 +2,7 @@
   var root = typeof self === 'object' && self.self === self && self || typeof global === 'object' && global.global === global && global || this || {}
 
   // 初始化 config
-  var J = {
+  var C = {
     config: {
       mode: null, // 模式，目前有 web 和 wxa 两种模式
       api_url: '', // 远程请求的 base url
@@ -13,9 +13,9 @@
   }
 
   if (typeof XMLHttpRequest !== 'undefined') {
-    J.config.mode = 'web'
+    C.config.mode = 'web'
   } else if (typeof wx !== 'undefined' && typeof wx['request'] !== 'undefined') {
-    J.config.mode = 'wxa' // 微信小程序
+    C.config.mode = 'wxa' // 微信小程序
   }
 
   /**
@@ -23,11 +23,11 @@
    * @param  {any}  obj
    * @return {Boolean}
    * @example
-   * J.isUndefined() // return true
+   * C.isUndefined() // return true
    *
-   * J.isUndefined({}) // return false
+   * C.isUndefined({}) // return false
    */
-  J.isUndefined = function (obj) {
+  C.isUndefined = function (obj) {
     return typeof obj === 'undefined'
   }
 
@@ -36,11 +36,11 @@
    * @param  {any}  obj
    * @return {Boolean}
    * @example
-   * J.isNull(null) // return true
+   * C.isNull(null) // return true
    *
-   * J.isNull() // return false
+   * C.isNull() // return false
    */
-  J.isNull = function (obj) {
+  C.isNull = function (obj) {
     return obj === null
   }
 
@@ -49,11 +49,11 @@
    * @param  {any}  obj
    * @return {Boolean}
    * @example
-   * J.isString('') // return true
+   * C.isString('') // return true
    *
-   * J.isString({}) // return false
+   * C.isString({}) // return false
    */
-  J.isString = function (obj) {
+  C.isString = function (obj) {
     return typeof obj !== 'undefined' && obj !== null && obj.constructor === String
   }
 
@@ -62,11 +62,11 @@
    * @param  {any}  obj
    * @return {Boolean}
    * @example
-   * J.isNumber(1) // return true
+   * C.isNumber(1) // return true
    *
-   * J.isNumber({}) // return false
+   * C.isNumber({}) // return false
    */
-  J.isNumber = function (obj) {
+  C.isNumber = function (obj) {
     return typeof obj !== 'undefined' && obj !== null && obj.constructor === Number
   }
 
@@ -75,11 +75,11 @@
    * @param  {any}  obj
    * @return {Boolean}
    * @example
-   * J.isArray([]) // return true
+   * C.isArray([]) // return true
    *
-   * J.isArray({}) // return false
+   * C.isArray({}) // return false
    */
-  J.isArray = function (obj) {
+  C.isArray = function (obj) {
     return obj && obj.constructor === Array
   }
 
@@ -88,11 +88,11 @@
    * @param  {any}  obj
    * @return {Boolean}
    * @example
-   * J.isObject([]) // return true
+   * C.isObject([]) // return true
    *
-   * J.isObject({}) // return false
+   * C.isObject({}) // return false
    */
-  J.isObject = function (obj) {
+  C.isObject = function (obj) {
     return obj && obj.constructor === Object
   }
 
@@ -101,11 +101,11 @@
    * @param  {any}  obj
    * @return {Boolean}
    * @example
-   * J.isFunction(function(){}) // return true
+   * C.isFunction(function(){}) // return true
    *
-   * J.isFunction({}) // return false
+   * C.isFunction({}) // return false
    */
-  J.isFunction = function (obj) {
+  C.isFunction = function (obj) {
     return typeof obj === 'function'
   }
 
@@ -114,7 +114,7 @@
    * @param  {any}  obj
    * @return {Boolean}
    */
-  J.isBlank = function (obj) {
+  C.isBlank = function (obj) {
     if (typeof obj === 'undefined' || obj === null || (obj.constructor === Array && obj.length === 0) || (obj.constructor === Object && Object.keys(obj).length === 0) || (obj.constructor === String && obj === '')) {
       return true
     }
@@ -129,11 +129,11 @@
    * @param {string} prefix
    * @return {string}
    * @example
-   * J.id() // returns '1'
+   * C.id() // returns '1'
    *
-   * J.id('name_') // returns 'name_2'
+   * C.id('name_') // returns 'name_2'
    */
-  J.id = function (prefix) {
+  C.id = function (prefix) {
     idCounter++
     return typeof prefix === 'undefined' ? idCounter.toString() : prefix + idCounter
   }
@@ -142,9 +142,9 @@
    * 生成 UUID。
    * @return {string}
    * @example
-   * J.uuid() // returns "314cf46a-ad7d-4ac2-9a02-55dc9300a2ae"
+   * C.uuid() // returns "314cf46a-ad7d-4ac2-9a02-55dc9300a2ae"
    */
-  J.uuid = function () {
+  C.uuid = function () {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
       var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
       return v.toString(16);
@@ -154,7 +154,7 @@
   /**
    * 时间戳
    */
-  J.timestamp = String(Date.now())
+  C.timestamp = String(Date.now())
 
   /**
    * 循环数组或对象，执行函数。
@@ -164,12 +164,12 @@
    * @param  {function} func
    * @return {array|object}
    * @example
-   * J.each([1, 2], function(index, value){})
+   * C.each([1, 2], function(index, value){})
    *
-   * J.each({a: 1}, function(key, value){})
+   * C.each({a: 1}, function(key, value){})
    */
-  J.each = function (collection, func) {
-    if (J.isArray(collection)) {
+  C.each = function (collection, func) {
+    if (C.isArray(collection)) {
       var index = -1
       var length = collection.length
 
@@ -178,7 +178,7 @@
           break
         }
       }
-    } else if (J.isObject(collection)) {
+    } else if (C.isObject(collection)) {
       var index = -1
       var keys = Object.keys(collection)
       var length = keys.length
@@ -201,18 +201,18 @@
    * @param  {function|string} func 回调函数，若为字符串，则取对象中 key 的值
    * @return {array|object}
    * @example
-   * J.map([1, 2], function(index, value){ return value + 1 }) //=> [2, 3]
-   * J.map({a: 1}, function(key, value){ return value + 1 }) //=> {a: 2}
-   * J.map([{a: 1}], 'a') //=> [1]
+   * C.map([1, 2], function(index, value){ return value + 1 }) //=> [2, 3]
+   * C.map({a: 1}, function(key, value){ return value + 1 }) //=> {a: 2}
+   * C.map([{a: 1}], 'a') //=> [1]
    */
-  J.map = function (collection, func) {
-    if (J.isString(func)) {
+  C.map = function (collection, func) {
+    if (C.isString(func)) {
       var key = func
       func = function (index, item) {
         return item[key]
       }
     }
-    if (J.isArray(collection)) {
+    if (C.isArray(collection)) {
       var index = -1
       var length = collection.length
       var result = []
@@ -220,7 +220,7 @@
       while (++index < length) {
         result[index] = func(index, collection[index])
       }
-    } else if (J.isObject(collection)) {
+    } else if (C.isObject(collection)) {
       var index = -1
       var keys = Object.keys(collection)
       var length = keys.length
@@ -243,19 +243,19 @@
    * @return {number|string} 若没找到，就返回 -1
    * @example
    * var array = [{id: 1}, {id: 2}]
-   * J.findIndex(array, {id: 2}) // => 1
-   * J.findIndex(array, function(item) { return item.id === 2 }) // => 1
+   * C.findIndex(array, {id: 2}) // => 1
+   * C.findIndex(array, function(item) { return item.id === 2 }) // => 1
    *
    * var obj = {a: {id: 1}, b: {id: 2}}
-   * J.findIndex(obj, {id: 2}) // => 'b'
-   * J.findIndex(obj, function(item) { return item.id === 2 }) // => 'b'
+   * C.findIndex(obj, {id: 2}) // => 'b'
+   * C.findIndex(obj, function(item) { return item.id === 2 }) // => 'b'
    */
-  J.findIndex = function (collection, condition) {
-    if (!J.isFunction(condition)) {
+  C.findIndex = function (collection, condition) {
+    if (!C.isFunction(condition)) {
       var condition_data = condition
       condition = function (item) {
         var result = false
-        J.each(condition_data, function (key, value) {
+        C.each(condition_data, function (key, value) {
           if (item[key] === value) {
             result = true
             return false
@@ -266,7 +266,7 @@
     }
 
     var index = -1
-    J.each(collection, function (i, item) {
+    C.each(collection, function (i, item) {
       if (condition(item)) {
         index = i
         return false
@@ -281,10 +281,10 @@
    * @param {array} collection
    * @param {function} condition
    */
-  J.filter = function (collection, condition) {
+  C.filter = function (collection, condition) {
     var result = []
 
-    J.each(collection, function (index, item) {
+    C.each(collection, function (index, item) {
       if (condition(index, item)) {
         result.push(item)
       }
@@ -298,10 +298,10 @@
    * @param {array} collection
    * @param {function} condition
    */
-  J.first = function (collection, condition) {
+  C.first = function (collection, condition) {
     var result = null
 
-    J.each(collection, function (index, item) {
+    C.each(collection, function (index, item) {
       if (condition(index, item)) {
         result = item
         return false
@@ -316,25 +316,25 @@
    * @param  {array|object} collection
    * @return {array|object}
    */
-  J.compact = function (collection) {
-    if (J.isArray(collection)) {
+  C.compact = function (collection) {
+    if (C.isArray(collection)) {
       var index = -1
       var length = collection.length
 
       while (++index < length) {
-        if (J.isBlank(collection[index])) {
+        if (C.isBlank(collection[index])) {
           collection.splice(index, 1)
           index -= 1
           length -= 1
         }
       }
-    } else if (J.isObject(collection)) {
+    } else if (C.isObject(collection)) {
       var index = -1
       var keys = Object.keys(collection)
       var length = keys.length
 
       while (++index < length) {
-        if (J.isBlank(collection[keys[index]])) {
+        if (C.isBlank(collection[keys[index]])) {
           delete collection[keys[index]]
           keys.splice(index, 1)
           index -= 1
@@ -353,13 +353,13 @@
    * @param {object} obj
    * @return {object}
    */
-  J.clone = function (obj) {
+  C.clone = function (obj) {
     return JSON.parse(JSON.stringify(obj))
   }
 
   var deep_merge = function (base, value) {
-    J.each(value, function (k, v) {
-      if (J.isObject(v)) {
+    C.each(value, function (k, v) {
+      if (C.isObject(v)) {
         if (typeof base[k] === 'undefined') {
           base[k] = {}
         }
@@ -376,22 +376,22 @@
    * @param {object|array} extends
    * @return {object|array}
    */
-  J.merge = function () {
+  C.merge = function () {
     var args = Array.apply(null, arguments)
     var base = args.shift()
 
-    if (J.isObject(base)) {
-      J.each(args, function (i, obj) {
-        J.each(obj, function (k, v) {
-          if (J.isObject(v)) {
+    if (C.isObject(base)) {
+      C.each(args, function (i, obj) {
+        C.each(obj, function (k, v) {
+          if (C.isObject(v)) {
             deep_merge(base[k], v)
           } else {
             base[k] = v
           }
         })
       })
-    } else if (J.isArray(base)) {
-      J.each(args, function (i, arr) {
+    } else if (C.isArray(base)) {
+      C.each(args, function (i, arr) {
         base = base.concat(arr)
       })
     }
@@ -405,11 +405,11 @@
    * @param {string|function} key 当为字符串时，用于以 object 的某个 key 的值为去重依据；为函数时则根据回调结果去重
    * @return {array}
    * @example
-   * J.uniq([1, 1, 2]) //=> [1, 2]
-   * J.uniq([{ k: 1 }, { k: 1 }, { k: 2 }]) //=> [{ k: 1 }, { k: 2 }]
-   * J.uniq([1, 2, 3], function(index, item) { return item > 1 }) //=> [2, 3]
+   * C.uniq([1, 1, 2]) //=> [1, 2]
+   * C.uniq([{ k: 1 }, { k: 1 }, { k: 2 }]) //=> [{ k: 1 }, { k: 2 }]
+   * C.uniq([1, 2, 3], function(index, item) { return item > 1 }) //=> [2, 3]
    */
-  J.uniq = function (array, key) {
+  C.uniq = function (array, key) {
     var result = []
 
     if (typeof key === 'undefined') {
@@ -417,17 +417,17 @@
         return result.indexOf(item) < 0
       }
     } else {
-      if (J.isString(key)) {
+      if (C.isString(key)) {
         var func = function (index, item) {
           var filter = {}
           filter[key] = item[key]
-          return J.findIndex(result, filter) < 0
+          return C.findIndex(result, filter) < 0
         }
       } else {
         var func = key
       }
     }
-    J.each(array, function (index, item) {
+    C.each(array, function (index, item) {
       if (func(index, item)) {
         result.push(item)
       }
@@ -442,22 +442,22 @@
    * @param  {string} prefix 前缀，可选
    * @return {string}
    */
-  J.encodeURIComponent = function (object, prefix) {
-    if (J.isString(object)) {
+  C.encodeURIComponent = function (object, prefix) {
+    if (C.isString(object)) {
       return encodeURIComponent(object)
     }
 
-    return J.compact(Object.keys(object).map(function (key) {
-      if (J.isBlank(object[key])) {
+    return C.compact(Object.keys(object).map(function (key) {
+      if (C.isBlank(object[key])) {
         return ''
-      } else if (J.isObject(object[key])) {
-        if (J.isBlank(prefix)) {
-          return J.encodeURIComponent(object[key], key)
+      } else if (C.isObject(object[key])) {
+        if (C.isBlank(prefix)) {
+          return C.encodeURIComponent(object[key], key)
         } else {
-          return J.encodeURIComponent(object[key], prefix + '%5B' + key + '%5D')
+          return C.encodeURIComponent(object[key], prefix + '%5B' + key + '%5D')
         }
       } else {
-        if (J.isBlank(prefix)) {
+        if (C.isBlank(prefix)) {
           return key + '=' + encodeURIComponent(object[key])
         } else {
           return prefix + '%5B' + key + '%5D=' + encodeURIComponent(object[key])
@@ -466,7 +466,7 @@
     })).join('&')
   }
 
-  J.promise = function (func) {
+  C.promise = function (func) {
     var data = {
       status: 'pending',
       args: null,
@@ -476,11 +476,11 @@
     }
 
     data.then = function (fulfilled, rejected) {
-      if (J.isFunction(fulfilled)) {
+      if (C.isFunction(fulfilled)) {
         data._fulfilled.push(fulfilled)
       }
 
-      if (J.isFunction(rejected)) {
+      if (C.isFunction(rejected)) {
         data._rejected.push(rejected)
       }
 
@@ -492,7 +492,7 @@
     }
 
     data.catch = function (rejected) {
-      if (J.isFunction(rejected)) {
+      if (C.isFunction(rejected)) {
         data._rejected.push(rejected)
       }
 
@@ -504,7 +504,7 @@
     }
 
     data.all = function (all) {
-      if (J.isFunction(all)) {
+      if (C.isFunction(all)) {
         data._all.push(all)
       }
 
@@ -518,12 +518,12 @@
         data.status = 'fulfilled'
       }
 
-      J.each(data._fulfilled, function (i, callback) {
+      C.each(data._fulfilled, function (i, callback) {
         callback.apply(this, data.args)
       })
       data._fulfilled = []
 
-      J.each(data._all, function (i, callback) {
+      C.each(data._all, function (i, callback) {
         callback.apply(this, data.args)
         data._all.splice(i, 1)
       })
@@ -537,12 +537,12 @@
         data.status = 'rejected'
       }
 
-      J.each(data._rejected, function (i, callback) {
+      C.each(data._rejected, function (i, callback) {
         callback.apply(this, data.args)
       })
       data._rejected = []
 
-      J.each(data._all, function (i, callback) {
+      C.each(data._all, function (i, callback) {
         callback.apply(this, data.args)
       })
       data._all = []
@@ -559,10 +559,10 @@
    * 新建一个 deferred 对象
    * @return {deferred}
    */
-  J.deferred = function () {
+  C.deferred = function () {
     var data = {}
 
-    data.promise = J.promise(function (resolve, reject) {
+    data.promise = C.promise(function (resolve, reject) {
       data.resolve = resolve
       data.reject = reject
     })
@@ -573,7 +573,7 @@
   /**
    * 观察者模块
    */
-  J.topics = {}
+  C.topics = {}
 
   /**
    * 订阅通知
@@ -584,18 +584,18 @@
    * @param  {boolean} options.sync 是否同步执行。默认为 false，异步执行
    * @return {string} 被保存的主题名
    */
-  J.on = function (topic, callback, options) {
+  C.on = function (topic, callback, options) {
     if (typeof topic !== 'string') {
       throw new TypeError('topic expect a string')
     }
 
-    var query = J.id('.' + topic + '.')
-    options = J.merge({
+    var query = C.id('.' + topic + '.')
+    options = C.merge({
       once: false,
       sync: false
     }, options || {})
 
-    J.topics[query] = {
+    C.topics[query] = {
       options: options,
       callback: callback
     }
@@ -608,12 +608,12 @@
    * @param  {string} topic 主题名
    * @return {undefined}
    */
-  J.off = function (topic) {
+  C.off = function (topic) {
     var query = '.' + topic + '.'
 
-    J.each(J.topics, function (key) {
+    C.each(C.topics, function (key) {
       if (key.startsWith(query)) {
-        delete (J.topics[key])
+        delete (C.topics[key])
       }
     })
   }
@@ -626,12 +626,12 @@
    * @param  {boolean} options.sync 是否同步执行。默认为 false，异步执行
    * @return {string} 被保存的主题名
    */
-  J.once = function (topic, callback, options) {
-    J.on(topic, callback, J.merge(options, { once: true }))
+  C.once = function (topic, callback, options) {
+    C.on(topic, callback, C.merge(options, { once: true }))
   }
 
-  J.sync = function (topic, callback, options) {
-    J.on(topic, callback, J.merge(options, { sync: true }))
+  C.sync = function (topic, callback, options) {
+    C.on(topic, callback, C.merge(options, { sync: true }))
   }
 
   /**
@@ -640,13 +640,13 @@
    * @param  {object} data 数据
    * @return {promise}
    */
-  J.trigger = function (topic, data) {
-    var deferred = J.deferred()
+  C.trigger = function (topic, data) {
+    var deferred = C.deferred()
     var query = '.' + topic + '.'
     var sync_callbacks = []
     var async_callbacks = []
 
-    J.each(J.topics, function (key, value) {
+    C.each(C.topics, function (key, value) {
       if (key.startsWith(query)) {
         if (value['options'] && value.options['sync']) {
           sync_callbacks.push(value.callback)
@@ -654,17 +654,17 @@
           async_callbacks.push(value.callback)
         }
         if (value['options'] && value.options['once']) {
-          delete (J.topics[key])
+          delete (C.topics[key])
         }
       }
     })
 
-    J.each(sync_callbacks, function (i, callback) {
+    C.each(sync_callbacks, function (i, callback) {
       callback(topic, data)
     })
 
     setTimeout(function () {
-      J.each(async_callbacks, function (i, callback) {
+      C.each(async_callbacks, function (i, callback) {
         callback(topic, data)
       })
       deferred.resolve()
@@ -678,8 +678,8 @@
    * @param {string} source 地址
    * @return {promise}
    */
-  J.getScript = function (source) {
-    var deferred = J.deferred()
+  C.getScript = function (source) {
+    var deferred = C.deferred()
     var script = document.createElement('script')
     var prior = document.getElementsByTagName('script')[0]
     script.async = 1
@@ -706,7 +706,7 @@
    * @prop {string[]} plugin 插件
    * @prop {string[]} tag 组件
    */
-  J.module_names = {
+  C.module_names = {
     plugin: [],
     tag: []
   }
@@ -718,14 +718,14 @@
    * @param  {string} name 组件或模块的名字
    * @return {promise}
    */
-  J.getModule = function (type, folder, name) {
-    if (J.module_names[type].indexOf(name) >= 0) {
-      var deferred = J.deferred()
+  C.getModule = function (type, folder, name) {
+    if (C.module_names[type].indexOf(name) >= 0) {
+      var deferred = C.deferred()
       deferred.promise.resolve()
       return deferred.promise
     } else {
-      return J.getScript(env.app.assets + folder + '/' + name + '.js?_=' + J.timestamp).then(function () {
-        J.module_names[type].push(name)
+      return C.getScript(env.app.assets + folder + '/' + name + '.js?_=' + C.timestamp).then(function () {
+        C.module_names[type].push(name)
       })
     }
   }
@@ -735,8 +735,8 @@
    * @param  {string} name 模块名字
    * @return {promise}
    */
-  J.getPlugin = function (name) {
-    return J.getModule('plugin', 'assets-plugins', name)
+  C.getPlugin = function (name) {
+    return C.getModule('plugin', 'assets-plugins', name)
   }
 
   /**
@@ -744,11 +744,11 @@
    * @param {string} name 组件名字
    * @return {promise}
    */
-  J.getTag = function (name) {
-    return J.getModule('tag', 'assets-tags', name)
+  C.getTag = function (name) {
+    return C.getModule('tag', 'assets-tags', name)
   }
 
-  J.remote = {}
+  C.remote = {}
 
   /**
    * 网络请求
@@ -757,33 +757,33 @@
    * @param {string} options.url 请求 URL，不能为空
    * @return {promise}
    */
-  J.remote.request = function (options) {
-    if (J.isString(options)) {
+  C.remote.request = function (options) {
+    if (C.isString(options)) {
       options = {
         url: options
       }
     }
-    options = J.merge({
+    options = C.merge({
       method: 'GET',
       dataType: 'json',
-      header: J.config.api_header
+      header: C.config.api_header
     }, options || {})
 
     if (options.url.indexOf(location.host) >= 0) {
       options.url = options.url.replace(new RegExp('http(s)?:\/\/' + location.host), '')
     }
 
-    if (J.isBlank(options['url'])) {
+    if (C.isBlank(options['url'])) {
       throw new URIError('url 不能为空')
     }
 
-    if (J.config.mode === null) {
-      throw new TypeError('J.config.mode 初始化失败')
+    if (C.config.mode === null) {
+      throw new TypeError('C.config.mode 初始化失败')
     }
 
-    var deferred = J.deferred()
+    var deferred = C.deferred()
 
-    switch (J.config.mode) {
+    switch (C.config.mode) {
       case 'wxa':
         options.success = function (res) {
           if (res.data.errors) {
@@ -825,110 +825,110 @@
 
     deferred.promise.then(function (res) {
       if (res.data) {
-        J.trigger('remote.request.success', res)
+        C.trigger('remote.request.success', res)
       } else {
-        J.trigger('remote.request.fail', res)
+        C.trigger('remote.request.fail', res)
       }
     }, function (res) {
-      J.trigger('remote.request.fail', res)
+      C.trigger('remote.request.fail', res)
     })
 
     return deferred.promise
   }
 
   /**
-   * 发起一个 get 请求，如果 query 不是以 http 开头，则会加上 J.config.api_url 作为前缀。
+   * 发起一个 get 请求，如果 query 不是以 http 开头，则会加上 C.config.api_url 作为前缀。
    * @param  {string} query
    * @param  {string} params
    * @return {promise}
    */
-  J.remote.get = function (query, params) {
+  C.remote.get = function (query, params) {
     if (query.indexOf('http') !== 0 && query.indexOf('/') !== 0) {
-      query = J.config.api_url + query
+      query = C.config.api_url + query
     }
 
-    if (!J.isBlank(params)) {
-      query = query + '?' + J.encodeURIComponent(params)
+    if (!C.isBlank(params)) {
+      query = query + '?' + C.encodeURIComponent(params)
     }
 
-    return J.remote.request({
+    return C.remote.request({
       url: query
     })
   }
 
   /**
-   * 发起一个 post 请求，如果 query 不是以 http 开头，则会加上 J.config.api_url 作为前缀。
+   * 发起一个 post 请求，如果 query 不是以 http 开头，则会加上 C.config.api_url 作为前缀。
    * @param  {string} query
    * @param  {string} params
    * @return {promise}
    */
-  J.remote.post = function (query, params) {
+  C.remote.post = function (query, params) {
     if (query.indexOf('http') !== 0 && query.indexOf('/') !== 0) {
-      query = J.config.api_url + query
+      query = C.config.api_url + query
     }
 
-    if (!J.isBlank(params)) {
-      query = query + '?' + J.encodeURIComponent(params)
+    if (!C.isBlank(params)) {
+      query = query + '?' + C.encodeURIComponent(params)
     }
 
-    return J.remote.request({
+    return C.remote.request({
       url: query,
       method: 'POST'
     })
   }
 
   /**
-   * 发起一个 delete 请求，如果 query 不是以 http 开头，则会加上 J.config.api_url 作为前缀。
+   * 发起一个 delete 请求，如果 query 不是以 http 开头，则会加上 C.config.api_url 作为前缀。
    * @param  {string} query
    * @param  {string} params
    * @return {promise}
    */
-  J.remote.delete = function (query, params) {
+  C.remote.delete = function (query, params) {
     if (query.indexOf('http') !== 0 && query.indexOf('/') !== 0) {
-      query = J.config.api_url + query
+      query = C.config.api_url + query
     }
 
-    if (!J.isBlank(params)) {
-      query = query + '?' + J.encodeURIComponent(params)
+    if (!C.isBlank(params)) {
+      query = query + '?' + C.encodeURIComponent(params)
     }
 
-    return J.remote.request({
+    return C.remote.request({
       url: query,
       method: 'DELETE'
     })
   }
 
   /**
-   * 发起一个 put 请求，如果 query 不是以 http 开头，则会加上 J.config.api_url 作为前缀。
+   * 发起一个 put 请求，如果 query 不是以 http 开头，则会加上 C.config.api_url 作为前缀。
    * @param  {string} query
    * @param  {string} params
    * @return {promise}
    */
-  J.remote.put = function (query, params) {
+  C.remote.put = function (query, params) {
     if (query.indexOf('http') !== 0 && query.indexOf('/') !== 0) {
-      query = J.config.api_url + query
+      query = C.config.api_url + query
     }
 
-    if (!J.isBlank(params)) {
-      query = query + '?' + J.encodeURIComponent(params)
+    if (!C.isBlank(params)) {
+      query = query + '?' + C.encodeURIComponent(params)
     }
 
-    return J.remote.request({
+    return C.remote.request({
       url: query,
       method: 'PUT'
     })
   }
 
   // Restful 模块
-  J.restful = {}
+  C.restful = {}
 
-  J.restful.setData = function (target, data) {
-    switch (J.config.mode) {
+  C.restful.setData = function (target, data) {
+    switch (C.config.mode) {
       case 'wxa':
         target.setData(data)
         break
       case 'web':
-        target.data = J.merge(target.data, data)
+        target.data = C.merge(target.data, data)
         target.update()
         break
     }
@@ -936,12 +936,12 @@
     return data
   }
 
-  J.restful.index = function (target, name, opts) {
+  C.restful.index = function (target, name, opts) {
     var init_data = {}
     init_data[name] = []
     init_data[name + '_next_link'] = null
     init_data[name + '_loading'] = false
-    J.restful.setData(target, init_data)
+    C.restful.setData(target, init_data)
 
     target[name + '_loaded_done'] = function (res) {
       var data = {}
@@ -953,45 +953,45 @@
         data[name + '_next_link'] = null
       }
 
-      J.restful.setData(target, data)
+      C.restful.setData(target, data)
     }
 
     target[name + '_loaded_fail'] = function (res) {
       var data = {}
       data[name + '_loading'] = false
-      J.restful.setData(target, data)
+      C.restful.setData(target, data)
     }
 
     target[name + '_load_next'] = function () {
       var data = {}
       data[name + '_loading'] = true
-      J.restful.setData(target, data)
-      J.remote.get(target.data[name + '_next_link']).then(target[name + '_loaded_done'], target[name + '_loaded_fail'])
+      C.restful.setData(target, data)
+      C.remote.get(target.data[name + '_next_link']).then(target[name + '_loaded_done'], target[name + '_loaded_fail'])
     }
   }
 
-  J.restful.show = function (target, name, opts) {
+  C.restful.show = function (target, name, opts) {
     var init_data = {}
     init_data[name] = {}
     init_data[name + '_loading'] = false
-    J.restful.setData(target, init_data)
+    C.restful.setData(target, init_data)
 
     target[name + '_loaded_done'] = function (res) {
       var data = {}
       data[name] = res.data
       data[name + '_loading'] = false
-      J.restful.setData(target, data)
+      C.restful.setData(target, data)
     }
 
     target[name + '_loaded_fail'] = function (res) {
       var data = {}
       data[name + '_loading'] = false
-      J.restful.setData(target, data)
+      C.restful.setData(target, data)
     }
   }
 
   // Websocket
-  J.socket = {
+  C.socket = {
     instance: null,
     subscribed: []
   }
@@ -1001,41 +1001,41 @@
   }
 
   /**
-   * 连接 Websocket。连接地址在 J.config.socket_url。若已连接，不会重复连接。
-   * @return {J.socket}
+   * 连接 Websocket。连接地址在 C.config.socket_url。若已连接，不会重复连接。
+   * @return {C.socket}
    */
-  J.socket.connect = function () {
-    if (J.socket.instance != null) {
-      return J.socket.instance
+  C.socket.connect = function () {
+    if (C.socket.instance != null) {
+      return C.socket.instance
     }
 
-    if (J.config.mode === 'wxa') {
+    if (C.config.mode === 'wxa') {
       var socket = { readyState: 0 }
 
       wx.connectSocket({
-        url: J.config.socket_url,
+        url: C.config.socket_url,
         header: {
           'content-type': 'application/json',
-          Cookie: 'X-JDXL=' + J.config.api_header['X-JDXL']
+          Cookie: 'X-JDXL=' + C.config.api_header['X-JDXL']
         }
       })
 
       wx.onSocketOpen(function (e) {
         socket.readyState = 1
-        J.each(socket_cached_sends.subscribe, function (i, json) {
+        C.each(socket_cached_sends.subscribe, function (i, json) {
           wx.sendSocketMessage({ data: json })
         })
         socket_cached_sends.subscribe = []
-        J.trigger('socket.open', e)
+        C.trigger('socket.open', e)
       })
 
       wx.onSocketError(function (e) {
         console.log(e)
-        J.trigger('socket.error', e)
+        C.trigger('socket.error', e)
       })
 
       wx.onSocketMessage(function (e) {
-        if (J.config.debug) {
+        if (C.config.debug) {
           console.log(e)
         }
 
@@ -1050,27 +1050,27 @@
           key += '.' + data.type
         }
 
-        if (J.isObject(data['message']) && data.message.action) {
+        if (C.isObject(data['message']) && data.message.action) {
           key += '.' + data.message.action
           data = data.message.data
         }
 
-        J.trigger(key, data)
+        C.trigger(key, data)
       })
 
       wx.onSocketClose(function (e) {
         console.log(e)
-        J.trigger('socket.close', e)
+        C.trigger('socket.close', e)
       })
     } else {
-      var socket = new WebSocket(J.config.socket_url)
+      var socket = new WebSocket(C.config.socket_url)
 
       socket.onopen = function (e) {
-        J.each(socket_cached_sends.subscribe, function (i, json) {
-          J.socket.instance.send(json)
+        C.each(socket_cached_sends.subscribe, function (i, json) {
+          C.socket.instance.send(json)
         })
         socket_cached_sends.subscribe = []
-        J.trigger('socket.open', e)
+        C.trigger('socket.open', e)
       }
 
       socket.onmessage = function (e) {
@@ -1086,55 +1086,55 @@
           key += '.' + data.type
         }
 
-        if (J.isObject(data['message']) && data.message.action) {
+        if (C.isObject(data['message']) && data.message.action) {
           key += '.' + data.message.action
           data = data.message.data
         }
 
-        J.trigger(key, data)
+        C.trigger(key, data)
       }
 
       socket.onclose = function (e) {
         console.log(e)
-        J.socket.instance = null
-        J.trigger('socket.close', e)
+        C.socket.instance = null
+        C.trigger('socket.close', e)
       }
 
       socket.onerror = function (e) {
         console.log(e)
-        J.trigger('socket.error', e)
+        C.trigger('socket.error', e)
       }
     }
 
-    J.socket.instance = socket
+    C.socket.instance = socket
 
-    return J.socket
+    return C.socket
   }
 
-  J.socket.alert = function () {
+  C.socket.alert = function () {
     $('.conversation_user-alert').append('<div class="j-alert j-alert-warn j-alert-fixed j-alert-socket"><div class="j-alert-icon j-alert-icon-warn"></div><div class="j-alert-content">你的网络似乎不太好，点这里刷新</div></div>')
   }
 
   /**
    * 发送信息
    * @param  {string} command 命令
-   * @param  {object} identifier 标识，默认为 J.socket.identifier
+   * @param  {object} identifier 标识，默认为 C.socket.identifier
    * @param  {object} data 数据
-   * @return {J.socket}
+   * @return {C.socket}
    */
-  J.socket.send = function (command, identifier, data) {
-    if (J.isBlank(command)) {
+  C.socket.send = function (command, identifier, data) {
+    if (C.isBlank(command)) {
       command = 'message'
     }
 
     var json = JSON.stringify({ command: command, identifier: JSON.stringify(identifier), data: JSON.stringify(data) })
 
-    if (J.socket.instance && J.socket.instance.readyState === 1) {
-      if (command === 'subscribe' || command === 'unsubscribe' || J.socket.subscribed.indexOf(identifier.channel) >= 0) {
-        if (J.config.mode === 'wxa') {
+    if (C.socket.instance && C.socket.instance.readyState === 1) {
+      if (command === 'subscribe' || command === 'unsubscribe' || C.socket.subscribed.indexOf(identifier.channel) >= 0) {
+        if (C.config.mode === 'wxa') {
           wx.sendSocketMessage({ data: json })
         } else {
-          J.socket.instance.send(json)
+          C.socket.instance.send(json)
         }
       } else {
         if (typeof socket_cached_sends[identifier.channel] === 'undefined') {
@@ -1153,7 +1153,7 @@
       }
     }
 
-    return J.socket
+    return C.socket
   }
 
   /**
@@ -1161,55 +1161,55 @@
    * @param  {string} channel 频道名称
    * @param  {string} action 指令名称
    * @param  {object} data 附带信息
-   * @return {J.socket}
+   * @return {C.socket}
    */
-  J.socket.action = function (channel, action, data) {
-    return J.socket.send('message', { channel: channel }, J.merge(data || {}, { action: action }))
+  C.socket.action = function (channel, action, data) {
+    return C.socket.send('message', { channel: channel }, C.merge(data || {}, { action: action }))
   }
 
   /**
    * 订阅频道
    * @param  {string} channel 频道名
    * @param  {object} data 附加信息
-   * @return {J.socket}
+   * @return {C.socket}
    */
-  J.socket.subscribe = function (channel, data) {
-    J.socket.send('subscribe', J.merge({ channel: channel }, data || {}))
+  C.socket.subscribe = function (channel, data) {
+    C.socket.send('subscribe', C.merge({ channel: channel }, data || {}))
 
-    J.once('socket.message.' + channel + '.confirm_subscription', function (t, e) {
+    C.once('socket.message.' + channel + '.confirm_subscription', function (t, e) {
       var identifier = JSON.parse(e.identifier)
 
-      J.socket.subscribed.push(identifier.channel)
+      C.socket.subscribed.push(identifier.channel)
 
       if (socket_cached_sends[identifier.channel]) {
-        J.each(socket_cached_sends[identifier.channel], function (i, json) {
-          J.socket.instance.send(json)
+        C.each(socket_cached_sends[identifier.channel], function (i, json) {
+          C.socket.instance.send(json)
         })
         socket_cached_sends[identifier.channel] = []
       }
     })
 
-    return J.socket
+    return C.socket
   }
 
   /**
    * 退订频道
    * @param  {string} channel 频道名
    * @param  {object} data 频道参数
-   * @return {J.socket}
+   * @return {C.socket}
    */
-  J.socket.unsubscribe = function (channel, data) {
-    J.socket.identifier = J.merge({ channel: channel }, data || {})
-    return J.socket.send('unsubscribe', J.socket.identifier)
+  C.socket.unsubscribe = function (channel, data) {
+    C.socket.identifier = C.merge({ channel: channel }, data || {})
+    return C.socket.send('unsubscribe', C.socket.identifier)
   }
 
-  J.socket.close = function () {
-    if (J.config.mode === 'wxa') {
+  C.socket.close = function () {
+    if (C.config.mode === 'wxa') {
       wx.closeSocket()
     }
 
-    J.socket.instance = null
-    J.socket.subscribed = []
+    C.socket.instance = null
+    C.socket.subscribed = []
     socket_cached_sends = {
       subscribe: []
     }
@@ -1218,13 +1218,13 @@
   // RequireJS
   if (typeof define === 'function' && define.amd) {
     define(function () {
-      return J
+      return C
     })
 
     // CommonJS
   } else if (typeof exports === 'object' && typeof module === 'object') {
-    module.exports = J
+    module.exports = C
   } else {
-    root.J = J
+    root.C = C
   }
 }.call(this))

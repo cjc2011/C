@@ -776,7 +776,7 @@
     if (J.isBlank(options['url'])) {
       throw new URIError('url 不能为空')
     }
-
+ 
     if (J.config.mode === null) {
       throw new TypeError('J.config.mode 初始化失败')
     }
